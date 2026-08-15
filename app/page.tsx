@@ -74,7 +74,7 @@ export default function PremiumDiagnostic() {
     }
   };
 
-  // --- TELEGRAM BOTGA MA'LUMOT YUBORISH (Dinamik Import) ---
+  // --- TELEGRAM BOTGA MA'LUMOT YUBORISH ---
   const handleComplete = async () => {
     const finalData = {
       action: "diagnostics_completed",
@@ -98,7 +98,10 @@ export default function PremiumDiagnostic() {
         const WebApp = module.default;
         
         if (WebApp.initDataUnsafe?.user) {
+          // 1. Ma'lumotni botga jo'natamiz
           WebApp.sendData(JSON.stringify(finalData));
+          // 2. Mini Appni darhol yopamiz
+          WebApp.close(); 
         } else {
           console.log("To'plangan ma'lumotlar:", finalData);
           alert("Hozir siz kompyuter brauzeridasiz. Bu tizim Telegram bot ichida ishlaganda ma'lumotlarni to'g'ridan-to'g'ri orqaga (botga) yuboradi!");
@@ -466,7 +469,7 @@ export default function PremiumDiagnostic() {
                   
                   {/* --- TELEGRAMGA YUBORISH TUGMASI --- */}
                   <button onClick={handleComplete} className="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-5 px-8 rounded-2xl transition-all transform hover:scale-105 shadow-xl text-lg flex items-center justify-center gap-3">
-                    Xaritani Yuklab Olish <span>🔒 99,000 UZS</span>
+                    Xaritani Yuklab Olish <span>🔒 49,000 UZS</span>
                   </button>
                   {/* --------------------------------- */}
 
