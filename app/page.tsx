@@ -97,10 +97,11 @@ export default function PremiumDiagnostic() {
         const module = await import("@twa-dev/sdk");
         const WebApp = module.default;
         
-        if (WebApp.initDataUnsafe?.user) {
-          // 1. Ma'lumotni botga jo'natamiz
+        // XATONI TO'G'RILASH: .user ni emas, platformani tekshiramiz!
+        if (WebApp.platform !== "unknown") {
+          // 1. Ma'lumotni botga yuborish
           WebApp.sendData(JSON.stringify(finalData));
-          // 2. Mini Appni darhol yopamiz
+          // 2. Dasturni darhol yopish
           WebApp.close(); 
         } else {
           console.log("To'plangan ma'lumotlar:", finalData);
