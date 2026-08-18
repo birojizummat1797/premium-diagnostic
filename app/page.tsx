@@ -26,22 +26,25 @@ export default function DiagnosticPage() {
     const tg = (window as any).Telegram?.WebApp;
     
     if (tg) {
-      // 1. Olingan barcha javoblarni JSON formatida Telegram botga otamiz
-      tg.sendData(JSON.stringify(finalAnswers));
+      // SHU QATOR O'ZGARDI: Backend kutayotgan "action" parolini qo'shib yuboramiz!
+      const payload = {
+        action: "diagnostics_completed",
+        data: finalAnswers
+      };
       
-      // 2. Mijozga chiroyli animatsiya ko'rinishi uchun 2 soniya kutib, oynani yopamiz
+      tg.sendData(JSON.stringify(payload));
+      
+      // 2 soniyadan keyin oynani yopish
       setTimeout(() => {
         tg.close();
       }, 2000);
     } else {
-      // Brauzerda test qilinayotgan bo'lsa
       setTimeout(() => {
         alert("Diagnostika yakunlandi! (Brauzer rejimi)");
         setIsSubmitting(false);
       }, 2000);
     }
   };
-
   const goNext = (newAnswers = answers) => {
     if (currentStep < diagnosticQuestions.length - 1) {
       setCurrentStep(currentStep + 1);
